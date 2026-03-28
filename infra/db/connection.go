@@ -24,7 +24,7 @@ func GetConnectionString(cnf *config.DBCOnfig) string {
 	}
 
 	return cnnString
-	//return "user=postgres password=63316526 host=localhost port=5432 dbname=sysagent sslmode=disable"
+	//return "user=******* password=******* host=localhost port=5432 dbname=sysagent sslmode=disable"
 }
 
 func NewConnection(cnf *config.DBCOnfig) (*sqlx.DB, error) {

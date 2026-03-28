@@ -7,9 +7,10 @@ import (
 	"sysagent/infra/db"
 	"sysagent/repo"
 	"sysagent/rest"
-	"sysagent/rest/handlers/product"
-	"sysagent/rest/handlers/user"
+	productHandler "sysagent/rest/handlers/product"
+	userHandler "sysagent/rest/handlers/user"
 	middleware "sysagent/rest/middlewares"
+	"sysagent/user"
 )
 
 func Serve() {
@@ -29,11 +30,15 @@ func Serve() {
 
 	middlewares := middleware.NewMiddlewares(cnf)
 
+	//repos
 	productRepo := repo.NewProductRepo(dbCon)
 	userRepo := repo.NewUserRepo(dbCon)
 
-	productHandler := product.NewHandler(middlewares, productRepo)
-	userHandler := user.NewHandler(cnf, userRepo)
+	//domains
+	usrSvc := user.NewService(userRepo)
+
+	productHandler := productHandler.NewHandler(middlewares, productRepo)
+	userHandler := userHandler.NewHandler(cnf, usrSvc)
 
 	server := rest.NewServer(
 		cnf,

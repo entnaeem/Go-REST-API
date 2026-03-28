@@ -17,7 +17,7 @@ func MigrateDB(db *sqlx.DB, dir string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Successfully migrated database")
+	fmt.Println("Database successfully migrated")
 
 	return nil
 

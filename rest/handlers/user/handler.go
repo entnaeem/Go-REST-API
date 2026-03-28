@@ -2,17 +2,16 @@ package user
 
 import (
 	"sysagent/config"
-	"sysagent/repo"
 )
 
 type Handler struct {
-	cnf      *config.Config
-	userRepo repo.UserRepo
+	cnf *config.Config
+	srv UserService
 }
 
-func NewHandler(cnf *config.Config, userRepo repo.UserRepo) *Handler {
+func NewHandler(cnf *config.Config, srv UserService) *Handler {
 	return &Handler{
-		cnf:      cnf,
-		userRepo: userRepo,
+		cnf: cnf,
+		srv: srv,
 	}
 }
